@@ -20,7 +20,8 @@ public class TestApplication {
 	public static void main(String[] args) {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/proj","root","root");
+			connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/proj?" + "user=root&password=root" +
+						"&enableEscapeProcessing=false&allowMultiQueries=true");
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}

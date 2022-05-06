@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Unsafe DB</title>
+    <title>Safe DB</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
@@ -14,17 +14,20 @@
     <tr th:if="${#lists.isEmpty(users)}">
         <td colspan="2"> No users sent </td>
     </tr>
+    <tr th:if="${error.getError() == 1}">
+        <td colspan="2"> Invalid input, no action taken.</td>
+    </tr>
     <tr th:each="user : ${users}">
         <td><span th:text="${user.name}"></span></td>
         <td><span th:text="${user.email}"></span></td>
     </tr>
 </table>
-<form action="#" th:action="@{/db}" th:object="${search}" method="post">
+<form action="#" th:action="@{/safedb}" th:object="${search}" method="post">
     Search name: <input type="text" th:field="*{str}" />
     <input type="submit" value="submit" />
 </form>
 <p>Create new user:</p>
-<form action="#" th:action="@{/db}" th:object="${newuser}" method="post">
+<form action="#" th:action="@{/safedb}" th:object="${newuser}" method="post">
     Name: <input type="text" th:field="*{name}" />
     email: <input type="text" th:field="*{email}" />
     <input type="submit" value="submit" />
